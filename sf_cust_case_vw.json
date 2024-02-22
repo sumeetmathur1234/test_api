@@ -1,0 +1,63 @@
+{
+  "DB_Name": "salesforce_dwh",
+  "Table_Name": "sf_cust_case_vw",
+  "Table_Definition": "This table stores data regarding tickets(Customer queries) created by the users on the salesforce platform. Use this table only when asked about Tickets created/closed. Use the subordercode to join with oms. suborder table and then join with the sale_order table (id) to find the user id.",
+  "columns": [
+    {
+      "column_name": "suborder_code",
+      "definition": "This column stores a unique identifier for a suborder associated with the case. In contexts where orders can be broken down into smaller parts (suborders) each with its specific tracking and management needs, this code helps link customer service cases to the relevant part of a larger order.",
+      "remarks": [
+        "There can be multiple tickets against a single suborder code.",
+        "When the details regarding a suborder's ticket is asked, use the casenumber to identify the subordercode and then use this subordercode as a foreign key for other relevant tables.",
+        "The subordercode works as a foreign key for suborder details."
+      ]
+    },
+    {
+      "column_name": "created_date",
+      "definition": "Records the date and time when the ticket was created in the system. This timestamp is essential for tracking the case's lifecycle, understanding response times, and managing SLAs (Service Level Agreements).",
+      "remarks": [
+        "Use this date when queries about tickets created/closed are asked."
+      ]
+    },
+    {
+      "column_name": "last_modified_date",
+      "definition": "Indicates the most recent date and time the ticket record was updated. This could involve changing the status, adding notes, updating customer information, or any other modification. Tracking this helps in understanding the case's progress and ensures that the case data is current.",
+      "remarks": [
+        "Use this column when queries about 'When it was last updated' are asked."
+      ]
+    },
+    {
+      "column_name": "casenumber",
+      "definition": "A unique identifier assigned to each ticket when it's created. This number is crucial for tracking, referencing, and managing cases within the customer service system. It allows service agents and customers to easily refer to a specific case.",
+      "remarks": [
+        "When counting tickets, use the casenumber from the salesforce table.",
+        "For counting the total tickets created in a day or any specific period, you should use COUNT(DISTINCT casenumber) to ensure each ticket is counted once regardless of how many updates or changes it may have undergone during its lifecycle."
+      ]
+    },
+    {
+      "column_name": "status",
+      "definition": "Reflects the current state of the case, typically indicating whether it is open, meaning active and under investigation or resolution, or closed, meaning the issue has been resolved to the customer's satisfaction or otherwise concluded. This status is key for managing the workflow of cases and prioritizing actions.",
+      "remarks": [
+        "Always take status in the LOWER case when comparing it with a string.",
+        "Status is 'closed' for closed tickets.",
+        "When writing query for open tickets, use lower(status) != 'closed'",
+        "Status other than 'closed' is considered as 'open'."
+      ]
+    },
+    {
+      "column_name": "origin",
+      "definition": "This column is used to find the origin of the ticket(from where the ticket was created).",
+      "remarks": [
+        "When asked about the origin of the ticket, use this column.",
+        "The distinct values of the origin are mentioned in the sample data column."
+      ]
+    },
+    {
+      "column_name": "closed_date",
+      "definition": "This column stores the date when the ticket was marked as 'Closed'.",
+      "remarks": [
+        "Use this column when asked about closed tickets."
+      ]
+    }
+  ]
+}
