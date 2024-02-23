@@ -13,7 +13,7 @@
       ]
     },
     {
-      "column_name": "created_date",
+      "column_name": "createddate",
       "definition": "Records the date and time when the ticket was created in the system. This timestamp is essential for tracking the case's lifecycle, understanding response times, and managing SLAs (Service Level Agreements).",
       "remarks": [
         "Use this date when queries about tickets created/closed are asked."
