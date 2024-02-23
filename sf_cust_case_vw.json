@@ -4,7 +4,7 @@
   "Table_Definition": "This table stores data regarding tickets(Customer queries) created by the users on the salesforce platform. Use this table only when asked about Tickets created/closed. Use the subordercode to join with oms. suborder table and then join with the sale_order table (id) to find the user id.",
   "columns": [
     {
-      "column_name": "suborder_code",
+      "column_name": "test",
       "definition": "This column stores a unique identifier for a suborder associated with the case. In contexts where orders can be broken down into smaller parts (suborders) each with its specific tracking and management needs, this code helps link customer service cases to the relevant part of a larger order.",
       "remarks": [
         "There can be multiple tickets against a single suborder code.",
